@@ -1,0 +1,20 @@
+# Compiled Binaries (Executables with no extension)
+*
+!*/
+!*.c
+!*.h
+!*.md
+!.gitignore
+
+# Object files and libraries
+*.o
+*.out
+*.so
+*.a
+
+# VS Code specific
+.vscode/
+
+# Temporary / Backup files
+*.swp
+*~
