@@ -38,7 +38,7 @@ void printShift(Shift log[], int n_days){
     }
 }
 void allocateLog(Shift **log, int n_days) {
-    // We dereference 'log' to reach the pointer in main and assign the memory
+    
     *log = (Shift*)malloc(sizeof(Shift) * n_days);
     
     if (*log == NULL) {
@@ -51,7 +51,7 @@ void allocateLog(Shift **log, int n_days) {
 // And freeLog becomes simple again because it's a single block:
 void freeLog(Shift **log) {
     free(*log);
-    *log = NULL; // Good practice: prevent dangling pointers
+    *log = NULL; 
 }
 
 int main(){
@@ -61,7 +61,18 @@ int main(){
     Shift *log = NULL;
     allocateLog(&log, n_days);
     initializeShift(log, n_days);
-    printShift(log, n_days);
+
+    FILE *fdata;
+    fdata = fopen("data.txt", "w");
+    if (fdata == NULL) {
+       printf("Error: Could not create the data file!\n");
+       return 1; 
+    }
+    for (int i = 0; i < n_days; i++){
+        fprintf(fdata, "Day : %d, Type: %s, Earnings: %g\n", log[i].day_number, log[i].type, log[i].profit );
+    }
+    fprintf(fdata,"\n");
+    fclose(fdata);
     freeLog(&log);
     return 0;
 }
